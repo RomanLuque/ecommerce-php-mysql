@@ -102,6 +102,7 @@ VALUES
 ('Zapatillas Blancas NB', 'Zapatillas casuales blancas NB.', 21300, 9, 4, 3, '36-42', 'fotos/calcasual/Nblanc.jpg'),
 ('Zapatillas negras nike', 'Zapatillas casuales negras nike.', 24500, 22, 4, 3, '36-42', 'fotos/calcasual/Nikenegr.png');
 
+
 ALTER TABLE productos ADD estado TINYINT(1) NOT NULL DEFAULT 1;
 
 CREATE TABLE usuarios (
@@ -120,6 +121,9 @@ VALUES ('Admin', 'Principal', 'admin@zonaoutfit.com', 'admin123', '2216123456', 
 
 INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, rol)
 VALUES ('Juan', 'Perez', 'juan@email.com', 'cliente123', '2216123457', 'cliente');
+=======
+ALTER TABLE productos ADD estados TINYINT(1) NOT NULL DEFAULT 1;
+
 
 SELECT *
 FROM productos;

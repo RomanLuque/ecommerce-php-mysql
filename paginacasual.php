@@ -10,7 +10,7 @@ include "funciones/conexion.php";
 
 $conexion = conectarDB();
 
-$query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_categoria = 4 AND estado = 1");
+$query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_categoria = 4 AND estados = 1");
 ?>
 <!DOCTYPE html>
 <html lang="es">
