@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <?php
 include "funciones/conexion.php";
@@ -14,17 +23,30 @@ $query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_categoria = 2
   <link rel="stylesheet" href="styles.css">
 </head>
 <body class="body-mujer">
-  <nav class="barra-navegacion">
-    <ul>
-      <li><a href="paginainfantil.php">Infantil</a></li>
-      <li><a href="hombre.php">Hombre</a></li>
-      <li><a href="paginamujer.php" class="activo">Mujer</a></li>
-      <li><a href="paginacasual.php">Casual</a></li>
-      <li><a href="paginadeport.php">Deportivo</a></li>
-      <li><a href="paginabotas.php">CRUD</a></li>
-      <li><a class="boton-principal-paginas" href="paginaprincipal.php">ZonaOutfit</a></li>
-    </ul>
-  </nav>
+
+<nav class="barra-navegacion">
+  <ul>
+    <li><a href="paginainfantil.php">Infantil</a></li>
+    <li><a href="hombre.php">Hombre</a></li>
+    <li><a href="paginamujer.php" class="activo">Mujer</a></li>
+    <li><a href="paginacasual.php">Casual</a></li>
+    <li><a href="paginadeport.php">Deportivo</a></li>
+    
+    <?php if ($_SESSION['rol'] === 'admin'): ?>
+    <li><a href="paginabotas.php">CRUD</a></li>
+    <?php endif; ?>
+
+    <li class="iconos-carrito-logout">
+      <a href="carrito.php"><img src="fotos/logos/carrito-de-compras.png" alt="Carrito"></a>
+      <a href="logout.php"><img src="fotos/logos/salida-de-emergencia.png" alt="Logout"></a>
+    </li>
+    
+
+    <li class="zonaoutfit-boton">
+      <a href="paginaprincipal.php">ZonaOutfit</a>
+    </li>
+  </ul>
+</nav>
 
   <div class="contenedor">
     <aside class="filtros">

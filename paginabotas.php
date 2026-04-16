@@ -1,5 +1,16 @@
-<!DOCTYPE html>
 <?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit;
+}
+
+if ($_SESSION['rol'] != 'admin') {
+    header("Location: paginaprincipal.php");
+    exit;
+}
+
 include "funciones/conexion.php";
 $conexion = conectarDB();
 
@@ -20,6 +31,7 @@ if (isset($_GET['msg'])) {
     if ($_GET['msg'] === "modif_ok")  $mensaje = "Producto modificado correctamente.";
 }
 ?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -29,16 +41,27 @@ if (isset($_GET['msg'])) {
 </head>
 <body class="body-infantil">
 <nav class="barra-navegacion">
-    <ul>
-      <li><a href="paginainfantil.php">Infantil</a></li>
-      <li><a href="hombre.php">Hombre</a></li>
-      <li><a href="paginamujer.php">Mujer</a></li>
-      <li><a href="paginacasual.php">Casual</a></li>
-      <li><a href="paginadeport.php">Deportivo</a></li>
-      <li><a href="paginabotas.php" class="activo">CRUD</a></li>
-      <li><a class="boton-principal-paginas" href="paginaprincipal.php">ZonaOutfit</a></li>
-    </ul>
+  <ul>
+    <li><a href="paginainfantil.php">Infantil</a></li>
+    <li><a href="hombre.php">Hombre</a></li>
+    <li><a href="paginamujer.php">Mujer</a></li>
+    <li><a href="paginacasual.php">Casual</a></li>
+    <li><a href="paginadeport.php">Deportivo</a></li>
+    
+    <?php if ($_SESSION['rol'] === 'admin'): ?>
+    <li><a href="paginabotas.php" class="activo">CRUD</a></li>
+    <?php endif; ?>
 
+    <li class="iconos-carrito-logout">
+      <a href="carrito.php"><img src="fotos/logos/carrito-de-compras.png" alt="Carrito"></a>
+      <a href="logout.php"><img src="fotos/logos/salida-de-emergencia.png" alt="Logout"></a>
+    </li>
+    
+
+    <li class="zonaoutfit-boton">
+      <a href="paginaprincipal.php">ZonaOutfit</a>
+    </li>
+  </ul>
 </nav>
 
 <h1>Administrar productos</h1>

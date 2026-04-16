@@ -102,6 +102,24 @@ VALUES
 ('Zapatillas Blancas NB', 'Zapatillas casuales blancas NB.', 21300, 9, 4, 3, '36-42', 'fotos/calcasual/Nblanc.jpg'),
 ('Zapatillas negras nike', 'Zapatillas casuales negras nike.', 24500, 22, 4, 3, '36-42', 'fotos/calcasual/Nikenegr.png');
 
+ALTER TABLE productos ADD estado TINYINT(1) NOT NULL DEFAULT 1;
+
+CREATE TABLE usuarios (
+    id_usuario  INT AUTO_INCREMENT PRIMARY KEY,
+    nombre      VARCHAR(50) NOT NULL,
+    apellido    VARCHAR(50) NOT NULL,
+    email       VARCHAR(100) NOT NULL UNIQUE,
+    contrasena  VARCHAR(255) NOT NULL,
+    telefono    VARCHAR(20),
+    rol         ENUM('cliente', 'admin') DEFAULT 'cliente',
+    created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, rol)
+VALUES ('Admin', 'Principal', 'admin@zonaoutfit.com', 'admin123', '2216123456', 'admin');
+
+INSERT INTO usuarios (nombre, apellido, email, contrasena, telefono, rol)
+VALUES ('Juan', 'Perez', 'juan@email.com', 'cliente123', '2216123457', 'cliente');
 
 SELECT *
 FROM productos;

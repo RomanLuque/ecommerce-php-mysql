@@ -1,11 +1,18 @@
-<!DOCTYPE html>
 <?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit;
+}
+
 include "funciones/conexion.php";
 
 $conexion = conectarDB();
 
 $query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_categoria = 3 AND estado = 1");
 ?>
+<!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
@@ -14,17 +21,29 @@ $query = mysqli_query($conexion, "SELECT * FROM productos WHERE id_categoria = 3
         <link rel="stylesheet" href="styles.css">
 </head>
 <body class="body-calzado">
-<nav class="barra-navegacion">
 
-    <ul>
-      <li><a href="paginainfantil.php">Infantil</a></li>
-      <li><a href="hombre.php">Hombre</a></li>
-      <li><a href="paginamujer.php">Mujer</a></li>
-      <li><a href="paginacasual.php">Casual</a></li>
-      <li><a href="paginadeport.php" class="activo">Deportivo</a></li>
-      <li><a href="paginabotas.php">CRUD</a></li>
-      <li><a class="boton-principal-paginas" href="paginaprincipal.php">ZonaOutfit</a></li>
-    </ul>
+<nav class="barra-navegacion">
+  <ul>
+    <li><a href="paginainfantil.php">Infantil</a></li>
+    <li><a href="hombre.php">Hombre</a></li>
+    <li><a href="paginamujer.php">Mujer</a></li>
+    <li><a href="paginacasual.php">Casual</a></li>
+    <li><a href="paginadeport.php" class="activo">Deportivo</a></li>
+    
+    <?php if ($_SESSION['rol'] === 'admin'): ?>
+    <li><a href="paginabotas.php">CRUD</a></li>
+    <?php endif; ?>
+
+    <li class="iconos-carrito-logout">
+      <a href="carrito.php"><img src="fotos/logos/carrito-de-compras.png" alt="Carrito"></a>
+      <a href="logout.php"><img src="fotos/logos/salida-de-emergencia.png" alt="Logout"></a>
+    </li>
+    
+
+    <li class="zonaoutfit-boton">
+      <a href="paginaprincipal.php">ZonaOutfit</a>
+    </li>
+  </ul>
 </nav>
 
 

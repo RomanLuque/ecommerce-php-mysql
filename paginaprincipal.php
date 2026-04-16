@@ -1,3 +1,12 @@
+<?php
+session_start();
+
+if (!isset($_SESSION['usuario_id'])) {
+    header("Location: index.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -12,11 +21,18 @@
     <div class="logo-tienda">Zona Outfit</div>
     <nav>
       <ul>
-        <li><a href="paginainfantil.php"">Infantil</a></li>
+        <li><a href="paginainfantil.php">Infantil</a></li>
         <li><a href="paginamujer.php">Mujer</a></li>
         <li><a href="paginadeport.php">Deportivo</a></li>
         <li><a href="paginacasual.php">Casual</a></li>
-        <li><a href="paginabotas.php">CRUD</a></li>
+    <?php if ($_SESSION['rol'] === 'admin'): ?>
+    <li><a href="paginabotas.php">CRUD</a></li>
+    <?php endif; ?>
+
+    <li class="iconos-carrito-logout">
+      <a href="carrito.php"><img src="fotos/logos/carrito-de-compras.png" alt="Carrito"></a>
+      <a href="logout.php"><img src="fotos/logos/salida-de-emergencia.png" alt="Logout"></a>
+    </li>
       </ul>
     </nav>
   </header>
