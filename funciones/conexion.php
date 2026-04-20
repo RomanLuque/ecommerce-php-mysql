@@ -3,9 +3,11 @@ function conectarDB() {
     $servidor   = "localhost";
     $usuario    = "root";
     $contrasenia = "";
-    $baseDeDatos = "zonaoutfit"; // ← TU BASE DE DATOS ÚNICA
+    $baseDeDatos = "zonaoutfit";
 
-    $conexion = mysqli_connect($servidor, $usuario, $contrasenia, $baseDeDatos,3306);
+    $conexion = mysqli_connect($servidor, $usuario, $contrasenia, $baseDeDatos);
+
+    mysqli_set_charset($conexion, "utf8mb4");
 
     if (!$conexion) {
         die("❌ Error de conexión: " . mysqli_connect_error());
